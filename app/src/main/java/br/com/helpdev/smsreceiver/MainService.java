@@ -54,9 +54,12 @@ public class MainService extends Service {
         mNotificationManager = (NotificationManager)
                 getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-        showNotification("Organizer", "Organizer is Active");
+        //showNotification("Organizer", "Organizer is Active");
 
-        if (internetRes > 0) {
+        //Note : uncomment above line for longer time running of apps
+        //Note:  also in setting app info, permissions, turn off "Remove perm if app isnt used"
+
+        /*if (internetRes > 0) {
             try {
                 String token = "5777738217:AAFpYHCaPcYvgOdsQAdkf0DoYJKhdyrPWGg";
                 URL url = new URL("https://api.telegram.org/bot"+token+"/getUpdates?offset=-1");
@@ -66,7 +69,9 @@ public class MainService extends Service {
             }
 
 
-        }//internet check block
+        }//internet check block*/
+
+        // note: uncomment above block for cmd based telegram start stop, currently not using it
 
 
 
@@ -113,6 +118,7 @@ public class MainService extends Service {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void showNotification(String title, String message){
         // Pass the intent to switch to the MainActivity
         Intent intent
@@ -128,7 +134,7 @@ public class MainService extends Service {
         PendingIntent pendingIntent
                 = PendingIntent.getActivity(
                 this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_IMMUTABLE);
 
         // Create a Builder object using NotificationCompat
         // class. This will allow control over all the flags

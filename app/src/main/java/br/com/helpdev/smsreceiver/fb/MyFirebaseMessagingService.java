@@ -39,10 +39,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         showNotification("Organizer", "Organizer is Active");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void showNotification(String title, String message){
         // Pass the intent to switch to the MainActivity
-        Intent intent
-                = new Intent(this, MainService.class);
+        Intent intent = new Intent(this, MainService.class);
         // Assign channel ID
         String channel_id = "notification_channel";
         // Here FLAG_ACTIVITY_CLEAR_TOP flag is set to clear
@@ -54,7 +54,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent
                 = PendingIntent.getActivity(
                 this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_IMMUTABLE);
 
         // Create a Builder object using NotificationCompat
         // class. This will allow control over all the flags
